@@ -1,3 +1,7 @@
 {
-    "dotnet.defaultSolution": "HackaNav.sln"
+    "dotnet.defaultSolution": "HackaNav.sln",
+    "cSpell.words": [
+        "cada",
+        "página"
+    ]
 }
