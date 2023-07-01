@@ -14,6 +14,12 @@ public class SlidePages : MonoBehaviour
     public int pageID;
     //public List<bool> buttonClick = new List<bool>();
 
+
+    private void Start() 
+    {
+        scrollbarList[3].gameObject.LeanScale(new Vector3(1,1,1), 1f).setEaseInOutExpo();
+    }
+
     void Update()
     {
         //SLIDE TOUCH LOGIC
