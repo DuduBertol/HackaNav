@@ -7,15 +7,16 @@ using TMPro;
 public class TasksText : MonoBehaviour
 {
     [SerializeField] string taskName;
-    [SerializeField] TextMeshProUGUI inputText;
+    [SerializeField] TMP_InputField inputFieldText;
 
     private void Start() 
     {
-        inputText.text = PlayerPrefs.GetString(taskName);  
+        inputFieldText = GetComponent<TMP_InputField>();
+        inputFieldText.text = PlayerPrefs.GetString(taskName);  
     }
     
     public void SavePlayerPrefs()
     {
-        PlayerPrefs.SetString(taskName, inputText.text);  
+        PlayerPrefs.SetString(taskName, inputFieldText.text);  
     }
 }
