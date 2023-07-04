@@ -12,7 +12,7 @@ public class DropdownResiduos : MonoBehaviour
     [SerializeField] string typeText;
     [SerializeField] string quantityText;
     [SerializeField] TextMeshProUGUI tempText;
-    [SerializeField] TextMeshProUGUI residueList;
+    [SerializeField] TextMeshProUGUI monthResidueList, typeResidueList, quantityResidueList;
 
     public void ChooseMonth(int value)
     {
@@ -85,7 +85,9 @@ public class DropdownResiduos : MonoBehaviour
     {
         if(monthText != "" && typeText != "" && quantityText != "")
         {
-            residueList.text += tempText.text + "\n";
+            monthResidueList.text += "• " + monthText + "\n";
+            typeResidueList.text += "• " + typeText + "\n";
+            quantityResidueList.text += "• " + quantityText + "\n";
             tempText.text = null; 
             ChooseMonth(0);
             ChooseType(0);
@@ -102,4 +104,6 @@ public class DropdownResiduos : MonoBehaviour
         //cadastro o texto
         //limpo o temptext
     }
+
+    
 }
