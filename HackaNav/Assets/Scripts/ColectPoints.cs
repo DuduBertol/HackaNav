@@ -5,14 +5,16 @@ using UnityEngine.UI;
 
 public class ColectPoints : MonoBehaviour
 {
-    [SerializeField] Transform parentRectTransform;
+    [SerializeField] List<GameObject> colectPointsList = new List<GameObject>();
     [SerializeField] Button newControlPoint;
-    [SerializeField] GameObject model;
     [SerializeField] GameObject panelDestroyAllConfirmed;
     public bool destroyAll;
     [SerializeField] int pointCount;
     
-    
+    private void Start() 
+    {
+          
+    }
 
 
     public void NewControlPoint()
@@ -20,9 +22,9 @@ public class ColectPoints : MonoBehaviour
         if(pointCount < 15)
         {
             destroyAll = false;
-            Instantiate(model, newControlPoint.transform.position, Quaternion.identity, parentRectTransform);
+            colectPointsList[pointCount].SetActive(true);
+            newControlPoint.gameObject.LeanMove(newControlPoint.gameObject.GetComponent<RectTransform>().position += new Vector3(0, -475, 0), 0.1f).setEaseInOutExpo();
             pointCount++;
-            newControlPoint.gameObject.LeanMove(newControlPoint.gameObject.GetComponent<RectTransform>().position += new Vector3(0, -400, 0), 0.1f).setEaseInOutExpo();
         }
         else
         {
@@ -34,7 +36,6 @@ public class ColectPoints : MonoBehaviour
 
     public void DestroyAll()
     {
-        panelDestroyAllConfirmed.SetActive(true);
         panelDestroyAllConfirmed.LeanScale(new Vector3(1, 1, 1), 0.3f);
         //puxar tela de confirmação
         //confirmou
@@ -44,17 +45,23 @@ public class ColectPoints : MonoBehaviour
 
     public void DestroyAllConfirmed()
     {
-        panelDestroyAllConfirmed.SetActive(false);
+        panelDestroyAllConfirmed.LeanScale(new Vector3(0, 0, 0), 0.3f);
         destroyAll = true;
+        for(int i = 0; i < colectPointsList.Count; i++)
+        {
+            colectPointsList[i].gameObject.SetActive(false);
+            colectPointsList[i].GetComponent<PointDropdown>().ClearPoint();
+        }
         pointCount = 0;
-        LeanTween.moveY(newControlPoint.gameObject.GetComponent<RectTransform>(), 1500, 0.5f).setEaseInOutExpo();
+        LeanTween.moveY(newControlPoint.gameObject.GetComponent<RectTransform>(), 1600, 0.5f).setEaseInOutExpo();
         newControlPoint.gameObject.SetActive(true);
     }
 
     public void Cancel()
     {
-        panelDestroyAllConfirmed.SetActive(false);
+        panelDestroyAllConfirmed.LeanScale(new Vector3(0, 0, 0), 0.3f);
     }
 
+    
     
 }

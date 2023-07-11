@@ -69,41 +69,6 @@ public class SlidePages : MonoBehaviour
     public void CalendarButton() { pageID = 6; ClickButton();}
     public void RankingButton() { pageID = 7; ClickButton();}
     public void ConfigButton() { pageID = 8; ClickButton();}
-
-    /* public void AboutButton() 
-    {
-        LeanTween.moveX(pageController.GetComponent<RectTransform>(), pageLocationX[0], 0.5f).setEaseInOutExpo();
-        LeanTween.moveY(scrollPages[0].GetComponent<RectTransform>(), pageLocationY[0], 0.5f).setEaseInOutExpo();
-    }
-    public void ConfigButton() 
-    {
-        LeanTween.moveX(pageController.GetComponent<RectTransform>(), pageLocationX[0], 0.5f).setEaseInOutExpo();
-        LeanTween.moveY(scrollPages[0].GetComponent<RectTransform>(), pageLocationY[0], 0.5f).setEaseInOutExpo();
-    }
-    public void PerfilButton() 
-    {
-        LeanTween.moveX(pageController.GetComponent<RectTransform>(), pageLocationX[0], 0.5f).setEaseInOutExpo();
-        LeanTween.moveY(scrollPages[0].GetComponent<RectTransform>(), pageLocationY[0], 0.5f).setEaseInOutExpo();
-    }
-    public void HomeButton() 
-    {
-        LeanTween.moveX(pageController.GetComponent<RectTransform>(), pageLocationX[0], 0.5f).setEaseInOutExpo();
-        LeanTween.moveY(scrollPages[0].GetComponent<RectTransform>(), pageLocationY[0], 0.5f).setEaseInOutExpo();
-    }
-    public void RoutineButton() 
-    {
-        LeanTween.moveX(pageController.GetComponent<RectTransform>(), pageLocationX[0], 0.5f).setEaseInOutExpo();
-        LeanTween.moveY(scrollPages[0].GetComponent<RectTransform>(), pageLocationY[0], 0.5f).setEaseInOutExpo();
-    }
-    public void CalendarButton() 
-    {
-        LeanTween.moveX(pageController.GetComponent<RectTransform>(), pageLocationX[0], 0.5f).setEaseInOutExpo();
-        LeanTween.moveY(scrollPages[0].GetComponent<RectTransform>(), pageLocationY[0], 0.5f).setEaseInOutExpo();
-    }
-    public void RankingButton() 
-    {
-        LeanTween.moveX(pageController.GetComponent<RectTransform>(), pageLocationX[0], 0.5f).setEaseInOutExpo();
-        LeanTween.moveY(scrollPages[0].GetComponent<RectTransform>(), pageLocationY[0], 0.5f).setEaseInOutExpo();
-    } */
+    
     #endregion
 }
