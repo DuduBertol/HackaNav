@@ -17,7 +17,7 @@ public class SlidePages : MonoBehaviour
 
     private void Start() 
     {
-        scrollbarList[4].gameObject.LeanScale(new Vector3(1,1,1), 1f).setEaseInOutExpo();
+        scrollbarList[3].gameObject.LeanScale(new Vector3(1,1,1), 1f).setEaseInOutExpo();
     }
 
     void Update()
@@ -61,14 +61,12 @@ public class SlidePages : MonoBehaviour
 
     #region SLIDE MENU BAR -- PAGE ID
     public void AboutButton() { pageID = 0; ClickButton();}
-    public void LearningButton() { pageID = 1; ClickButton();}
-    public void CadastroButton() { pageID = 2; ClickButton();}
-    public void PerfilButton() { pageID = 3; ClickButton(); }
-    public void HomeButton() { pageID = 4; ClickButton();}
-    public void RoutineButton() { pageID = 5; ClickButton();}
-    public void CalendarButton() { pageID = 6; ClickButton();}
-    public void RankingButton() { pageID = 7; ClickButton();}
-    public void ConfigButton() { pageID = 8; ClickButton();}
+    public void CadastroButton() { pageID = 1; ClickButton();}
+    public void PerfilButton() { pageID = 2; ClickButton(); }
+    public void HomeButton() { pageID = 3; ClickButton();}
+    public void RoutineButton() { pageID = 4; ClickButton();}
+    public void CalendarButton() { pageID = 5; ClickButton();}
+    public void RankingButton() { pageID = 6; ClickButton();}
     
     #endregion
 }
