@@ -11,12 +11,13 @@ public class DropdownResiduos : MonoBehaviour
     [SerializeField] string monthText;
     [SerializeField] string typeText;
     [SerializeField] string quantityText;
-    [SerializeField] float tempQuantityKG;
-    [SerializeField] float quantityKG;
+    [SerializeField] int tempQuantityKG;
+    [SerializeField] int quantityKG;
     [SerializeField] TextMeshProUGUI totalQuantityText;
     [SerializeField] TextMeshProUGUI tempText;
     [SerializeField] TextMeshProUGUI monthResidueList, typeResidueList, quantityResidueList;
     [SerializeField] GameObject panelDeleteText;
+    public PlayfabManager playfabManager;
 
 
     private void Start() 
@@ -24,7 +25,7 @@ public class DropdownResiduos : MonoBehaviour
         monthResidueList.text = PlayerPrefs.GetString("ListaMes");
         typeResidueList.text =  PlayerPrefs.GetString("ListaTipo");
         quantityResidueList.text  =  PlayerPrefs.GetString("ListaQuantidade");
-        quantityKG = PlayerPrefs.GetFloat("ValorQuantidade");
+        quantityKG = PlayerPrefs.GetInt("ValorQuantidade");
     }
     public void ChoosePage(int value)
     {
@@ -92,37 +93,27 @@ public class DropdownResiduos : MonoBehaviour
         }
         if(value == 1)
         {
-            tempQuantityKG = 0.25f;
-            quantityText = "0.25 Kg";
+            tempQuantityKG = 1;
+            quantityText = "1 Kg";
         }
         if(value == 2)
         {
-            tempQuantityKG = 0.5f;
-            quantityText = "0.5 Kg";
+            tempQuantityKG = 2;
+            quantityText = "2 Kg";
         }
         if(value == 3)
         {
-            tempQuantityKG = 1f;
-            quantityText = "1 Kg";
+            tempQuantityKG = 3;
+            quantityText = "3 Kg";
         }
         if(value == 4)
         {
-            tempQuantityKG = 2f;
-            quantityText = "2 Kg";
+            tempQuantityKG = 4;
+            quantityText = "4 Kg";
         }
         if(value == 5)
         {
-            tempQuantityKG = 3f;
-            quantityText = "3 Kg";
-        }
-        if(value == 6)
-        {
-            tempQuantityKG = 4f;
-            quantityText = "4 Kg";
-        }
-        if(value == 7)
-        {
-            tempQuantityKG = 5f;
+            tempQuantityKG = 5;
             quantityText = "5 Kg";
         }
     }
@@ -146,7 +137,8 @@ public class DropdownResiduos : MonoBehaviour
             PlayerPrefs.SetString("ListaMes", monthResidueList.text);
             PlayerPrefs.SetString("ListaTipo", typeResidueList.text);
             PlayerPrefs.SetString("ListaQuantidade", quantityResidueList.text);
-            PlayerPrefs.SetFloat("ValorQuantidade", quantityKG);
+            PlayerPrefs.SetInt("ValorQuantidade", quantityKG); //salvar o valor total para somá-lo e enviar ao leaderboard
+            playfabManager.SendLeaderboard(quantityKG); // envio ao leaderboard
 
             //zerar tudo
             monthDrop.value = 0;
