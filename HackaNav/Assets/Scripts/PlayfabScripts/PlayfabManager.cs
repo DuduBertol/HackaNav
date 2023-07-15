@@ -20,6 +20,8 @@ public class PlayfabManager : MonoBehaviour
     public Transform rowsParent2;
 
     public PerfilData perfilData;
+    int rank, highRank;
+    [SerializeField] TextMeshProUGUI rankText, highRankText;
 
     void Start()
     {
@@ -145,6 +147,13 @@ public class PlayfabManager : MonoBehaviour
                 texts[1].color = Color.yellow;
                 texts[2].color = Color.yellow;
             }
+
+            rank = (item.Position + 1);
+            if(rank > highRank)
+                highRank = rank;
+
+            rankText.text = rank.ToString();
+            highRankText.text = highRank.ToString();
 
             Debug.Log(item.Position + " | " + item.PlayFabId + " | " + item.StatValue);
         }
