@@ -177,6 +177,10 @@ public class DropdownResiduos : MonoBehaviour
     {
         Application.OpenURL("https://youtu.be/9RU4BUjyxm8");
     }
+    public void OpenGithub()
+    {
+        Application.OpenURL("https://github.com/DuduBertol");
+    }
 
     public void OpenDeletePanel()
     {

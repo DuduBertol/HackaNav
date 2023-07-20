@@ -11,6 +11,7 @@ public class PlayfabManager : MonoBehaviour
     [SerializeField] GameObject nameWindow;
     [SerializeField] GameObject nameEditWindow;
     [SerializeField] GameObject startScreenPanel;
+     [SerializeField] GameObject tempPanel;
     [SerializeField] TMP_InputField nameInput;
     [SerializeField] TMP_InputField nameEditInput;
     [SerializeField] TextMeshProUGUI nameText;
@@ -25,6 +26,7 @@ public class PlayfabManager : MonoBehaviour
 
     void Start()
     {
+        TempPanel();
         Login();
     }
 
@@ -54,8 +56,11 @@ public class PlayfabManager : MonoBehaviour
 
         if(name == null)
             nameWindow.SetActive(true);
-        else
+            
+        else if(name != null)
+        {
             nameWindow.SetActive(false);
+        }
             
     }
     void OnError(PlayFabError error)
@@ -136,9 +141,11 @@ public class PlayfabManager : MonoBehaviour
             TextMeshProUGUI[] texts = newGO.GetComponentsInChildren<TextMeshProUGUI>();
             Image[] image = newGO.GetComponentsInChildren<Image>();
             image[0].sprite = perfilData.stateSprites[perfilData.stateID];
-            nameText.text = item.DisplayName;
+            //nameText.text = item.DisplayName;
             texts[0].text = (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
+            // ---TESTE---
+            nameText.text = texts[1].text;
             texts[2].text = item.StatValue.ToString();
 
             if(item.PlayFabId == loggedInPlayfabID)
@@ -149,7 +156,7 @@ public class PlayfabManager : MonoBehaviour
             }
 
             rank = (item.Position + 1);
-            if(rank > highRank)
+            if(rank < highRank)
                 highRank = rank;
 
             rankText.text = rank.ToString();
@@ -207,7 +214,7 @@ public class PlayfabManager : MonoBehaviour
     public void OpenNameScreen()
     {
         LeanTween.scale(nameWindow.GetComponent<RectTransform>(), new Vector3(1,1,1), 0.6f).setEaseInExpo();
-        LeanTween.scale(startScreenPanel.GetComponent<RectTransform>(), new Vector3(0,0,0), 0.3f).setEaseOutExpo();
+        LeanTween.scale(startScreenPanel.GetComponent<RectTransform>(), new Vector3(0,0,0), 0.5f).setEaseOutExpo();
     }
     public void OpenEditName()
     {
@@ -216,5 +223,16 @@ public class PlayfabManager : MonoBehaviour
     public void CloseEditName()
     {
         LeanTween.scale(nameEditWindow.GetComponent<RectTransform>(), new Vector3(0,0,0), 0.6f).setEaseInExpo();
+    }
+
+    private void TempPanel()
+    {
+        LeanTween.moveLocalX(tempPanel, 540, 1f).setEaseInCubic().setOnComplete(TempPanel2);
+    }
+
+    private void TempPanel2()
+    {
+        LeanTween.moveLocalX(tempPanel, 1620, 1f).setDelay(2f).setEaseInCubic();
+        Destroy(tempPanel, 4f);
     }
 }

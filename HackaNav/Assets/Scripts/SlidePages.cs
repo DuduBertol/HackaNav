@@ -12,11 +12,13 @@ public class SlidePages : MonoBehaviour
     public List<GameObject> scrollPages = new List<GameObject>();
     public List<GameObject> scrollbarList = new List<GameObject>();
     public int pageID;
+    //[SerializeField] float pagePosX;
     //public List<bool> buttonClick = new List<bool>();
 
 
     private void Start() 
     {
+        //pagePosX = 0;
         scrollbarList[3].gameObject.LeanScale(new Vector3(1,1,1), 1f).setEaseInOutExpo();
     }
 
@@ -29,14 +31,16 @@ public class SlidePages : MonoBehaviour
 
             if(t.phase == TouchPhase.Moved)
             {
-                if(t.deltaPosition.y > 25)
+                if(t.deltaPosition.x > 25)
                 {
-                    LeanTween.moveY(pageController.GetComponent<RectTransform>(), pageController.GetComponent<RectTransform>().position.x + 1080f, 0.5f).setEaseInOutExpo();
+                    //LeanTween.moveX(pageController.GetComponent<RectTransform>(), pageController.GetComponent<RectTransform>().position.x + 1080f, 0.5f).setEaseInOutExpo();
+                    LeanTween.moveLocalX(pageController, pagePosX + 1080, 0.1f);
                 }
                 
-                if(t.deltaPosition.y < -25)
+                if(t.deltaPosition.x < -25)
                 {
-                    LeanTween.moveY(pageController.GetComponent<RectTransform>(), (pageController.GetComponent<RectTransform>().position.x - 1080f), 0.5f).setEaseInOutExpo();
+                    //LeanTween.moveX(pageController.GetComponent<RectTransform>(), (pageController.GetComponent<RectTransform>().position.x - 1080f), 0.5f).setEaseInOutExpo();
+                    LeanTween.moveLocalX(pageController, pagePosX - 1080, 0.1f);
                 }
             }
         } */

@@ -10,10 +10,30 @@ public class ColectPoints : MonoBehaviour
     [SerializeField] GameObject panelDestroyAllConfirmed;
     public bool destroyAll;
     [SerializeField] int pointCount;
+    [SerializeField] float buttonPosY = 1600;
+    [SerializeField] GameObject limitPanel;
     
     private void Start() 
     {
-          
+        pointCount = PlayerPrefs.GetInt("pointCount");
+
+        if(pointCount != 0)
+        {
+            buttonPosY = PlayerPrefs.GetFloat("buttonPos");
+            LeanTween.moveLocalY(newControlPoint.gameObject, buttonPosY, 0.1f).setEaseInOutExpo();
+        }
+
+        for(int i = 0; i < colectPointsList.Count; i++)
+        {
+            if(PlayerPrefs.GetString("point" + i.ToString()) == "true")
+            {
+                colectPointsList[i].SetActive(true);
+            }
+            if(PlayerPrefs.GetString("point" + i.ToString()) == "false")
+            {
+                colectPointsList[i].SetActive(false);
+            } 
+        }
     }
 
 
@@ -23,13 +43,22 @@ public class ColectPoints : MonoBehaviour
         {
             destroyAll = false;
             colectPointsList[pointCount].SetActive(true);
-            newControlPoint.gameObject.LeanMove(newControlPoint.gameObject.GetComponent<RectTransform>().position += new Vector3(0, -475, 0), 0.1f).setEaseInOutExpo();
+            PlayerPrefs.SetString("point" + pointCount.ToString(), "true");
+            
+            buttonPosY -= 350;
+            LeanTween.moveLocalY(newControlPoint.gameObject, buttonPosY, 0.1f).setEaseInOutExpo();
+            PlayerPrefs.SetFloat("buttonPos", buttonPosY);
+            
             pointCount++;
+            PlayerPrefs.SetInt("pointCount", pointCount);
         }
         else
         {
             newControlPoint.gameObject.SetActive(false);
             Debug.Log("Limite máximo de Pontos de Coleta");
+            //criar texto temporario
+
+            LeanTween.scale(limitPanel, new Vector3(1,1,1), 0.6f).setEaseOutExpo();
         }
         
     }
@@ -49,12 +78,17 @@ public class ColectPoints : MonoBehaviour
         destroyAll = true;
         for(int i = 0; i < colectPointsList.Count; i++)
         {
+            PlayerPrefs.SetString("point" + i.ToString(), "false");
             colectPointsList[i].gameObject.SetActive(false);
             colectPointsList[i].GetComponent<PointDropdown>().ClearPoint();
         }
         pointCount = 0;
-        LeanTween.moveY(newControlPoint.gameObject.GetComponent<RectTransform>(), 1600, 0.5f).setEaseInOutExpo();
+        PlayerPrefs.SetInt("pointCount", 0);
+        buttonPosY = 1600;
+        LeanTween.moveLocalY(newControlPoint.gameObject, buttonPosY, 0.1f).setEaseInOutExpo();
+        PlayerPrefs.SetFloat("buttonPos", buttonPosY);
         newControlPoint.gameObject.SetActive(true);
+        LeanTween.scale(limitPanel, new Vector3(0,0,0), 0.1f);
     }
 
     public void Cancel()
