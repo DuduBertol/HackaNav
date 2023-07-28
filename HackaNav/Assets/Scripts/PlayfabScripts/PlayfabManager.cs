@@ -20,12 +20,13 @@ public class PlayfabManager : MonoBehaviour
     public Transform rowsParent;
     public Transform rowsParent2;
 
-    public PerfilData perfilData;
+    //public PerfilData perfilData;
     int rank, highRank;
     [SerializeField] TextMeshProUGUI rankText, highRankText;
 
     void Start()
     {
+        nameText.text = PlayerPrefs.GetString("NamePlayer");
         TempPanel();
         Login();
     }
@@ -71,6 +72,9 @@ public class PlayfabManager : MonoBehaviour
 
     public void SubmitNameButton()
         {
+            nameText.text = nameInput.text;
+            PlayerPrefs.SetString("NamePlayer", nameText.text);
+
             var request = new UpdateUserTitleDisplayNameRequest
             {
                 DisplayName = nameInput.text,
@@ -80,6 +84,9 @@ public class PlayfabManager : MonoBehaviour
 
     public void EditNameButton()
         {
+            nameText.text = nameEditInput.text;
+            PlayerPrefs.SetString("NamePlayer", nameText.text);
+
             var request = new UpdateUserTitleDisplayNameRequest
             {
                 DisplayName = nameEditInput.text,
@@ -140,12 +147,10 @@ public class PlayfabManager : MonoBehaviour
             GameObject newGO = Instantiate(rowPrefab, rowsParent);
             TextMeshProUGUI[] texts = newGO.GetComponentsInChildren<TextMeshProUGUI>();
             Image[] image = newGO.GetComponentsInChildren<Image>();
-            image[0].sprite = perfilData.stateSprites[perfilData.stateID];
+            //image[0].sprite = perfilData.stateSprites[perfilData.stateID];
             //nameText.text = item.DisplayName;
             texts[0].text = (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
-            // ---TESTE---
-            nameText.text = texts[1].text;
             texts[2].text = item.StatValue.ToString();
 
             if(item.PlayFabId == loggedInPlayfabID)
@@ -153,14 +158,9 @@ public class PlayfabManager : MonoBehaviour
                 texts[0].color = Color.yellow;
                 texts[1].color = Color.yellow;
                 texts[2].color = Color.yellow;
+                rank = (item.Position + 1);
             }
-
-            rank = (item.Position + 1);
-            if(rank < highRank)
-                highRank = rank;
-
             rankText.text = rank.ToString();
-            highRankText.text = highRank.ToString();
 
             Debug.Log(item.Position + " | " + item.PlayFabId + " | " + item.StatValue);
         }
@@ -189,8 +189,8 @@ public class PlayfabManager : MonoBehaviour
             GameObject newGO = Instantiate(rowPrefab, rowsParent2);
             TextMeshProUGUI[] texts = newGO.GetComponentsInChildren<TextMeshProUGUI>();
             Image[] image = newGO.GetComponentsInChildren<Image>();
-            image[0].sprite = perfilData.stateSprites[perfilData.stateID];
-            nameText.text = item.DisplayName;
+            //image[0].sprite = perfilData.stateSprites[perfilData.stateID];
+            //nameText.text = item.DisplayName;
             texts[0].text = (item.Position + 1).ToString();
             texts[1].text = item.DisplayName;
             texts[2].text = item.StatValue.ToString();

@@ -26,6 +26,7 @@ public class DropdownResiduos : MonoBehaviour
         typeResidueList.text =  PlayerPrefs.GetString("ListaTipo");
         quantityResidueList.text  =  PlayerPrefs.GetString("ListaQuantidade");
         quantityKG = PlayerPrefs.GetInt("ValorQuantidade");
+        totalQuantityText.text = "TOTAL = " + quantityKG.ToString();
     }
     public void ChoosePage(int value)
     {
